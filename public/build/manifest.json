@@ -1,0 +1,70 @@
+{
+  "resources/js/app.js": {
+    "file": "assets/app.7bbc5bb9.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/views/landing/Beranda.vue",
+      "resources/js/views/landing/Undangan.vue",
+      "resources/js/views/dashboard/Dashboard.vue"
+    ],
+    "css": [
+      "assets/app.81730565.css"
+    ]
+  },
+  "resources/js/views/landing/Beranda.vue": {
+    "file": "assets/Beranda.918693bd.js",
+    "src": "resources/js/views/landing/Beranda.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/views/landing/Undangan.vue": {
+    "file": "assets/Undangan.8a263ca6.js",
+    "src": "resources/js/views/landing/Undangan.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_EditorComponent.e5c45fdd.js"
+    ],
+    "css": [
+      "assets/Undangan.5a92a21e.css"
+    ]
+  },
+  "_EditorComponent.e5c45fdd.js": {
+    "file": "assets/EditorComponent.e5c45fdd.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/EditorComponent.ebe4b4d5.css"
+    ]
+  },
+  "resources/js/views/dashboard/Dashboard.vue": {
+    "file": "assets/Dashboard.454b4f9c.js",
+    "src": "resources/js/views/dashboard/Dashboard.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_EditorComponent.e5c45fdd.js"
+    ]
+  },
+  "resources/js/views/landing/Undangan.css": {
+    "file": "assets/Undangan.5a92a21e.css",
+    "src": "resources/js/views/landing/Undangan.css"
+  },
+  "EditorComponent.css": {
+    "file": "assets/EditorComponent.ebe4b4d5.css",
+    "src": "EditorComponent.css"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.aa1a6533.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.css": {
+    "file": "assets/app.81730565.css",
+    "src": "resources/js/app.css"
+  }
+}
