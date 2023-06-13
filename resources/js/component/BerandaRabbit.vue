@@ -1,5 +1,5 @@
 <script setup>
-import Rabbit from "../../assets/rabbit.json";
+import Rabbit from "../assets/rabbit.json";
 </script>
 <template>
     <div class="z-0">
@@ -64,60 +64,15 @@ import Rabbit from "../../assets/rabbit.json";
             <div
                 class="text-lg lg:text-[40px] text-center lg:text-right px-[10px] lg:pl-[50px] lg:pr-[150px] pt-5 lg:pt-[140px] leading-snug"
             >
-                Bikin Undangan Nikah Kamu Sekarang dengan Harga Mulai
-                <div class="text-xl text-red pt-4 font-bold">
+                Ayo Cek Diagnosa Gejala Yang Kamu Alami
+                <!-- <div class="text-xl text-red pt-4 font-bold">
                     <span><del>RP. 70.000</del></span> &nbsp; &nbsp; &nbsp;
                     &nbsp; <br class="lg:hidden" />
                     <span class="text-[40px]">Rp. 24.000</span>
-                </div>
+                </div> -->
                 <div class="pt-10 text-sm lg:text-xl">
                     <button class="btn-secondary">Cek Disini !</button>
                 </div>
-                <svg
-                    class="inline-flex self-end w-5 lg:w-10 mt-10 translate-x-[150px] lg:translate-x-[100px] translate-y-[40px]"
-                    viewBox="0 0 67 111"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <rect width="22" height="22" rx="10" fill="#74C69D" />
-                    <rect
-                        x="44"
-                        width="23"
-                        height="22"
-                        rx="10"
-                        fill="#74C69D"
-                    />
-                    <rect
-                        y="44"
-                        width="22"
-                        height="23"
-                        rx="10"
-                        fill="#74C69D"
-                    />
-                    <rect
-                        x="44"
-                        y="44"
-                        width="23"
-                        height="23"
-                        rx="10"
-                        fill="#74C69D"
-                    />
-                    <rect
-                        y="89"
-                        width="22"
-                        height="22"
-                        rx="10"
-                        fill="#74C69D"
-                    />
-                    <rect
-                        x="44"
-                        y="89"
-                        width="23"
-                        height="22"
-                        rx="10"
-                        fill="#74C69D"
-                    />
-                </svg>
             </div>
         </div>
     </div>

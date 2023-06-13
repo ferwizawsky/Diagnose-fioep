@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 .landing-navbar {
-    @apply flex justify-between items-center px-5 lg:px-7 py-4 text-xl;
+    @apply flex bg-white/20 backdrop-blur-sm justify-between items-center px-5 lg:px-7 py-4 text-xl fixed top-0 left-0 w-full z-30;
 }
 .landing-navbar ul{
     @apply flex items-center lg:mr-20 text-sm;
 }
 .landing-navbar ul li {
-    @apply px-2 mx-2 py-1 hover:text-primary   cursor-pointer ease-in-out duration-300;
+    @apply px-2 md:mx-2 ;
 }
 
 .u-top-nav li {

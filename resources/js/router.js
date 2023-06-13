@@ -1,31 +1,13 @@
 import { createWebHistory, createRouter } from "vue-router";
 
 const Beranda = () => import("@/views/landing/Beranda.vue");
-const Undangan = () => import("@/views/landing/Undangan.vue");
-const Maker = () => import("@/views/landing/Maker/Index.vue");
-const Dashboard = () => import("@/views/dashboard/Dashboard.vue");
+const Diagnose = () => import("@/views/landing/Diagnose.vue");
 
 const routes = [
     {
         path: "/",
         name: "Beranda",
         component: Beranda,
-        meta: {
-            public: true,
-        },
-    },
-    {
-        path: "/maker",
-        name: "Undangan Maker",
-        component: Maker,
-        meta: {
-            public: true,
-        },
-    },
-    {
-        path: "/buat-undangan",
-        name: "Buat Undangan",
-        component: Undangan,
         meta: {
             public: true,
         },
@@ -39,11 +21,11 @@ const routes = [
         },
     },
     {
-        path: "/dashboard",
-        name: "Dashboard",
-        component: Dashboard,
+        path: "/diagnosa",
+        name: "Diagnose",
+        component: Diagnose,
         meta: {
-            public: false,
+            public: true,
         },
     },
 ];
@@ -61,7 +43,7 @@ router.beforeEach((to, from, next) => {
     const privateRoute = to.matched.some((record) => !record.meta.public);
     const publicRoute = to.matched.some((record) => record.meta.public);
     if (privateRoute && !token) next("/");
-    if (to.name == "Login" && token) next("/dashboard");
+    if (to.name == "Login" && token) next("/Diagnose");
     else next();
 });
 
