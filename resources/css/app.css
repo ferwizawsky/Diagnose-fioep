@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.inputan{
+    @apply mb-2;
+}
+.inputan span {
+    @apply font-semibold text-xs;
+}
+.inputan input {
+    @apply w-full border border-gray-200 rounded-lg py-1.5 px-5 focus:outline-none focus:border-primary ;
+}
+.inputan textarea {
+    @apply w-full border border-gray-200 rounded-lg py-1.5 px-5 min-h-[100px] focus:outline-none focus:border-primary ;
+}
+.inputan select {
+    @apply w-full border border-gray-200 rounded-lg py-1.5 px-5 focus:outline-none focus:border-primary ;
+} 
+
 .landing-navbar {
     @apply flex bg-white/20 backdrop-blur-sm justify-between items-center px-5 lg:px-7 py-4 text-xl fixed top-0 left-0 w-full z-30;
 }

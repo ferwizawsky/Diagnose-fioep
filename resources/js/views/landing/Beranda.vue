@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import BerandaRabbit from "../../component/BerandaRabbit.vue";
-import Navbar from "../../component/Navbar.vue";
+import BerandaRabbit from "../../components/BerandaRabbit.vue";
+import Navbar from "../../components/Navbar.vue";
 
 const username = ref("");
 const password = ref("");

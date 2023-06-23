@@ -40,6 +40,15 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/', 'profil');
             // Route::post('/', 'store');
         });
+    Route::prefix('auth')->controller(UserController::class)->group(function () {
+        Route::get('/profile', 'profile');
+        Route::get('/logout', 'logout');
+    });
+    Route::prefix('user')->controller(UserController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::delete('/{id}', 'delete');
+    });
 });
 // Route::get('/preview', "UndanganController@preview");
 // Route::get('/show', "UndanganController@show");

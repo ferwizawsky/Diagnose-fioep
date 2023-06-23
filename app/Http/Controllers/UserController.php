@@ -30,7 +30,7 @@ class UserController extends Controller
     }
 
 
-    public function profil(Request $request)
+    public function profile(Request $request)
     {
         $user = $request->user();
         return response()->json([
@@ -50,10 +50,10 @@ class UserController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-        $path = "";
-        if ($request->image) {
-            $path = $this->uploadFile($request->image);
-        }
+        // $path = "";
+        // if ($request->image) {
+        //     $path = $this->uploadFile($request->image);
+        // }
         $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
@@ -63,7 +63,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function get(Request $request)
+    public function index(Request $request)
     {
         $data = User::where('username', 'LIKE', '%' . $request->cari . '%')
             // ->whereHas(
@@ -75,9 +75,7 @@ class UserController extends Controller
             // )
             ->orderBy('created_at', 'DESC')->paginate($request->total ?? 10);
 
-        return response()->json([
-            "data" => $data
-        ], 200);
+        return UserResource::collection($data);
     }
 
     public function delete($id)

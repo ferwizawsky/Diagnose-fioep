@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import Navbar from "../../component/Navbar.vue";
+import Navbar from "../../components/Navbar.vue";
 const listGejala = ref([]);
 const listForm = ref([]);
 const listResult = ref([]);
