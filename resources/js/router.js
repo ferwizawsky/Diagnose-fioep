@@ -40,13 +40,13 @@ const routes = [
     {
         path: "/admin",
         name: "Base Admin",
-        redirect: "/admin/dash",
+        redirect: "/admin/penyakit",
         component: () => import("@/views/admin/base.vue"),
         children: [
             {
                 path: "/admin/dash",
                 name: "Admin Dash",
-                component: () => import("@/views/admin/index.vue"),
+                component: () => import("@/views/admin/exam.vue"),
             },
             {
                 path: "/admin/penyakit",

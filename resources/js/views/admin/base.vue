@@ -6,10 +6,10 @@ import { RouterLink, RouterView, useRouter } from "vue-router";
 
 const router = useRouter();
 const navbar = [
-    {
-        to: "/admin/dash",
-        text: "Dashboard",
-    },
+    // {
+    //     to: "/admin/dash",
+    //     text: "Dashboard",
+    // },
     {
         to: "/admin/penyakit",
         text: "Penyakit ",
@@ -50,7 +50,7 @@ onMounted(() => {
 <template>
     <div class="">
         <div class="flex items-center justify-between px-4 py-2 shadow-md">
-            <div class="pl-2 font-semibold text-primary">LISTENU ADMIN</div>
+            <div class="pl-2 font-semibold text-primary">ADMIN</div>
             <div class="">
                 <ul class="nav">
                     <li v-for="index in navbar">

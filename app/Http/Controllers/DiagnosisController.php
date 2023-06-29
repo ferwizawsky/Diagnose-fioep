@@ -82,8 +82,8 @@ class DiagnosisController extends Controller
     public function storeRelasi(Request $request)
     {
         $credentials = $request->validate([
-            'kode' => 'required',
-            'value' => 'required',
+            'gejala_kode' => 'required',
+            'penyakit_kode' => 'required',
         ]);
         $user = GejalaPenyakit::create([
             'gejala_kode' => $request->gejala_kode,
@@ -116,7 +116,7 @@ class DiagnosisController extends Controller
             'kode' => 'required',
             'value' => 'required',
         ]);
-        $user = Gejala::create([
+        $user = Penyakit::create([
             'kode' => $request->kode,
             'value' => $request->value,
         ]);

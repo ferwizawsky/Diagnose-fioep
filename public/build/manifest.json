@@ -1,47 +1,99 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.566150c6.js",
+    "file": "assets/app.18783bab.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
       "resources/js/views/landing/Beranda.vue",
-      "resources/js/views/landing/Diagnose.vue"
+      "resources/js/views/landing/Diagnose.vue",
+      "resources/js/views/login.vue",
+      "resources/js/views/admin/base.vue",
+      "resources/js/views/admin/exam.vue",
+      "resources/js/views/admin/user.vue"
     ],
     "css": [
-      "assets/app.c904a3ff.css"
+      "assets/app.d65b150f.css"
     ]
   },
   "resources/js/views/landing/Beranda.vue": {
-    "file": "assets/Beranda.abe1d4be.js",
+    "file": "assets/Beranda.6dd0e366.js",
     "src": "resources/js/views/landing/Beranda.vue",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.js",
-      "_Navbar.116a1456.js"
+      "_Navbar.8599e34f.js",
+      "resources/js/app.js"
     ]
   },
-  "_Navbar.116a1456.js": {
-    "file": "assets/Navbar.116a1456.js",
+  "_Navbar.8599e34f.js": {
+    "file": "assets/Navbar.8599e34f.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/views/landing/Diagnose.vue": {
-    "file": "assets/Diagnose.2b59eac4.js",
+    "file": "assets/Diagnose.0e273c06.js",
     "src": "resources/js/views/landing/Diagnose.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_Navbar.116a1456.js",
+      "_Navbar.8599e34f.js",
       "resources/js/app.js"
     ]
   },
+  "resources/js/views/login.vue": {
+    "file": "assets/login.aafdcbc5.js",
+    "src": "resources/js/views/login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/views/admin/base.vue": {
+    "file": "assets/base.de4f428b.js",
+    "src": "resources/js/views/admin/base.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_menu.3fde1349.js"
+    ],
+    "css": [
+      "assets/base.dc449077.css"
+    ]
+  },
+  "_menu.3fde1349.js": {
+    "file": "assets/menu.3fde1349.js",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/views/admin/exam.vue": {
+    "file": "assets/exam.0284a416.js",
+    "src": "resources/js/views/admin/exam.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_menu.3fde1349.js"
+    ]
+  },
+  "resources/js/views/admin/user.vue": {
+    "file": "assets/user.a06ac2ae.js",
+    "src": "resources/js/views/admin/user.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_menu.3fde1349.js"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app.94c96679.css",
+    "file": "assets/app.d21c0a43.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/js/views/admin/base.css": {
+    "file": "assets/base.dc449077.css",
+    "src": "resources/js/views/admin/base.css"
+  },
   "resources/js/app.css": {
-    "file": "assets/app.c904a3ff.css",
+    "file": "assets/app.d65b150f.css",
     "src": "resources/js/app.css"
   }
 }

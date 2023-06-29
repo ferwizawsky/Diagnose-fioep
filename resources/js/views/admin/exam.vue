@@ -4,18 +4,27 @@ import { onMounted, ref } from "vue";
 
 const tanggal = ref(["2023-01-01", new Date().toISOString().split("T")[0]]);
 const listData = ref([]);
-const formUser = ref({
-    username: "",
-    name: "",
-    password: "",
-    role: "student",
+const listGejala = ref([]);
+const listRelasi = ref([]);
+
+const formPenyakit = ref({
+    kode: "",
+    value: "",
+});
+const formGejala = ref({
+    kode: "",
+    value: "",
+});
+const formRelasi = ref({
+    gejala_kode: "",
+    penyakit_kode: "",
 });
 async function getUser() {
     listData.value = [];
     try {
-        const { data } = await axios.get(`/user?limit=1000`);
+        const { data } = await axios.get(`/diagnose/penyakit?limit=1000`);
         console.log(data);
-        listData.value = data.data;
+        listData.value = data.data.data;
     } catch (e) {
         if (e.response.request.status == 401) {
             localStorage.removeItem("token");
@@ -24,18 +33,41 @@ async function getUser() {
     }
 }
 
-async function addUser() {
+async function getGejala() {
     listData.value = [];
     try {
-        const { data } = await axios.post(`/user`, formUser.value);
+        const { data } = await axios.get(`/diagnose/gejala?limit=1000`);
         console.log(data);
-        formUser.value = {
-            username: "",
-            name: "",
-            password: "",
-            role: "student",
-        };
-        getUser();
+        listGejala.value = data.data.data;
+    } catch (e) {
+        if (e.response.request.status == 401) {
+            localStorage.removeItem("token");
+            location.reload();
+        }
+    }
+}
+
+async function getRelasi() {
+    listData.value = [];
+    try {
+        const { data } = await axios.get(`/diagnose/relasi?limit=1000`);
+        console.log(data);
+        listRelasi.value = data.data.data;
+    } catch (e) {
+        if (e.response.request.status == 401) {
+            localStorage.removeItem("token");
+            location.reload();
+        }
+    }
+}
+async function addData(e) {
+    let dt = {};
+    if (e == "/diagnose/penyakit") dt = formPenyakit.value;
+    if (e == "/diagnose/gejala") dt = formGejala.value;
+    if (e == "/diagnose/relasi") dt = formRelasi.value;
+    try {
+        const { data } = await axios.post(e, dt);
+        // location.reload();
     } catch (e) {
         console.log(e);
     }
@@ -56,6 +88,8 @@ async function deleteUser(e) {
 
 onMounted(() => {
     getUser();
+    getGejala();
+    getRelasi();
 });
 
 function dateFormatter(e) {
@@ -78,133 +112,105 @@ function hourFormatter(e) {
 }
 </script>
 <template>
-    <div class="mt-[25px]">
-        <form @submit.prevent="addUser()" class="grid md:grid-cols-3 gap-x-4">
-            <div class="inputan">
-                <span>Username</span>
-                <input type="text" v-model="formUser.username" required />
-            </div>
-            <!-- <div class="inputan">
-                <span>Name</span>
-                <input type="text" v-model="formUser.name" required />
-            </div> -->
-            <div class="inputan">
-                <span>Password</span>
-                <input type="text" v-model="formUser.password" required />
-            </div>
-
-            <!-- <div class="inputan">
-        <span>Role</span>
-        <select v-model="formUser.role" required>
-          <option value="admin">Admin</option>
-          <option value="student">Student</option>
-        </select>
-      </div> -->
-            <div>
-                <br />
-                <button
-                    class="bg-primary/20 text-primary px-10 py-2 rounded-full"
-                >
-                    Add User
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <div
-        class="w-full text-sm border border-gray-200 bg-white rounded-xl shadows p-4 pt-10 mt-6 max-h-[85vh] overflow-auto"
-    >
-        <!-- <div class="md:flex justify-between mb-4">
-      <div class="font-semibold">Rekap Data Terakhir</div>
-      <div class="text-sm">
-        <input
-          type="date"
-          class="rounded-md h-full px-4 py-1 w-[140px] border border-gray-300 text-gray-600 focus:outline-none"
-          v-model="tanggal[0]"
-        />
-        <span class="mx-4">To</span>
-        <input
-          type="date"
-          class="rounded-md h-full px-4 py-1 w-[140px] border border-gray-300 text-gray-600 focus:outline-none"
-          v-model="tanggal[1]"
-        />
-        <button
-          @click="download_excel()"
-          class="bg-primary/20 text-primary px-6 ml-2 py-2 rounded-full"
-        >
-          Download
-        </button>
-      </div>
-    </div> -->
-        <div class="px-4">
-            <table class="table-auto w-[600px] md:w-full">
-                <thead>
-                    <tr class="text-left">
-                        <th>No.</th>
-                        <th>Username</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        class="border-t"
-                        v-for="(index, item, a) in listData"
-                        :key="index"
+    <div>
+        <div class="mt-[25px]">
+            <div class="font-bold text-primary py-4 text-xl">Penyakit</div>
+            <form
+                @submit.prevent="addData('/diagnose/penyakit')"
+                class="grid md:grid-cols-3 gap-x-4"
+            >
+                <div class="inputan">
+                    <span>Kode</span>
+                    <input type="text" v-model="formPenyakit.kode" required />
+                </div>
+                <div class="inputan">
+                    <span>Value</span>
+                    <input type="text" v-model="formPenyakit.value" required />
+                </div>
+                <div>
+                    <br />
+                    <button
+                        class="bg-primary/20 text-primary px-10 py-2 rounded-full"
                     >
-                        <td class="pr-6 py-2">{{ item + 1 }}.</td>
-                        <td class="pr-6 py-2">{{ index.username }}</td>
-                        <td class="pr-6 py-2">
-                            <!-- {{ hourFormatter(index.created_at) }}
+                        Add Data
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div
+            class="w-full text-sm border border-gray-200 bg-white rounded-xl shadows p-4 pt-10 mt-6 max-h-[85vh] overflow-auto"
+        >
+            <div class="px-4">
+                <table class="table-auto w-[600px] md:w-full">
+                    <thead>
+                        <tr class="text-left">
+                            <th>No.</th>
+                            <th>Kode</th>
+                            <th>Value</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            class="border-t"
+                            v-for="(index, item, a) in listData"
+                            :key="index"
+                        >
+                            <td class="pr-6 py-2">{{ item + 1 }}.</td>
+                            <td class="pr-6 py-2">{{ index.kode }}</td>
+                            <td class="pr-6 py-2">{{ index.value }}</td>
+                            <td class="pr-6 py-2">
+                                <!-- {{ hourFormatter(index.created_at) }}
               {{ dateFormatter(index.created_at) }} -->
 
-                            <Menu
-                                as="div"
-                                class="relative inline-block text-left"
-                            >
-                                <div>
-                                    <MenuButton
-                                        class="p-2 rounded-lg text-primary bg-primary/10"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            id="Outline"
-                                            viewBox="0 0 24 24"
-                                            class="w-4 h-4"
+                                <Menu
+                                    as="div"
+                                    class="relative inline-block text-left"
+                                >
+                                    <div>
+                                        <MenuButton
+                                            class="p-2 rounded-lg text-primary bg-primary/10"
                                         >
-                                            <path
-                                                fill="currentColor"
-                                                d="M7,0H4A4,4,0,0,0,0,4V7a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V4A4,4,0,0,0,7,0ZM9,7A2,2,0,0,1,7,9H4A2,2,0,0,1,2,7V4A2,2,0,0,1,4,2H7A2,2,0,0,1,9,4Z"
-                                            />
-                                            <path
-                                                fill="currentColor"
-                                                d="M20,0H17a4,4,0,0,0-4,4V7a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V4a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
-                                            />
-                                            <path
-                                                fill="currentColor"
-                                                d="M7,13H4a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V17A4,4,0,0,0,7,13Zm2,7a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2H7a2,2,0,0,1,2,2Z"
-                                            />
-                                            <path
-                                                fill="currentColor"
-                                                d="M20,13H17a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V17A4,4,0,0,0,20,13Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
-                                            />
-                                        </svg>
-                                    </MenuButton>
-                                </div>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                id="Outline"
+                                                viewBox="0 0 24 24"
+                                                class="w-4 h-4"
+                                            >
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M7,0H4A4,4,0,0,0,0,4V7a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V4A4,4,0,0,0,7,0ZM9,7A2,2,0,0,1,7,9H4A2,2,0,0,1,2,7V4A2,2,0,0,1,4,2H7A2,2,0,0,1,9,4Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M20,0H17a4,4,0,0,0-4,4V7a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V4a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M7,13H4a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V17A4,4,0,0,0,7,13Zm2,7a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2H7a2,2,0,0,1,2,2Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M20,13H17a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V17A4,4,0,0,0,20,13Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
+                                                />
+                                            </svg>
+                                        </MenuButton>
+                                    </div>
 
-                                <div class="relative z-30">
-                                    <transition
-                                        enter-active-class="transition duration-100 ease-out"
-                                        enter-from-class="transform scale-95 opacity-0"
-                                        enter-to-class="transform scale-100 opacity-100"
-                                        leave-active-class="transition duration-75 ease-in"
-                                        leave-from-class="transform scale-100 opacity-100"
-                                        leave-to-class="transform scale-95 opacity-0"
-                                    >
-                                        <MenuItems
-                                            class="absolute right-0 mt-2 w-40 z-30 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                    <div class="relative z-30">
+                                        <transition
+                                            enter-active-class="transition duration-100 ease-out"
+                                            enter-from-class="transform scale-95 opacity-0"
+                                            enter-to-class="transform scale-100 opacity-100"
+                                            leave-active-class="transition duration-75 ease-in"
+                                            leave-from-class="transform scale-100 opacity-100"
+                                            leave-to-class="transform scale-95 opacity-0"
                                         >
-                                            <div class="px-1 py-1">
-                                                <!-- <MenuItem v-slot="{ active }">
+                                            <MenuItems
+                                                class="absolute right-0 mt-2 w-40 z-30 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                            >
+                                                <div class="px-1 py-1">
+                                                    <!-- <MenuItem v-slot="{ active }">
                           <button
                             @click="$router.push(`/`)"
                             :class="[
@@ -217,39 +223,330 @@ function hourFormatter(e) {
                             Go Exam
                           </button>
                         </MenuItem>  -->
-                                                <MenuItem v-slot="{ active }">
-                                                    <button
-                                                        @click="
-                                                            deleteUser(index)
-                                                        "
-                                                        :class="[
-                                                            active
-                                                                ? 'bg-primary text-white'
-                                                                : 'text-gray-900',
-                                                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                                                        ]"
+                                                    <MenuItem
+                                                        v-slot="{ active }"
                                                     >
-                                                        Delete
-                                                    </button>
-                                                </MenuItem>
-                                            </div>
-                                        </MenuItems>
-                                    </transition>
-                                </div>
-                            </Menu>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="text-center pt-4">
-            <!-- <button
+                                                        <button
+                                                            @click="
+                                                                deleteUser(
+                                                                    index
+                                                                )
+                                                            "
+                                                            :class="[
+                                                                active
+                                                                    ? 'bg-primary text-white'
+                                                                    : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </MenuItem>
+                                                </div>
+                                            </MenuItems>
+                                        </transition>
+                                    </div>
+                                </Menu>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center pt-4">
+                <!-- <button
         v-if="!isMax"
         @click="loadMore()"
         class="bg-primary/20 text-primary px-10 py-2 rounded-full"
       >
         Load More
       </button> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="my-[70px]">
+        <div class="mt-[25px]">
+            <div class="font-bold text-primary py-4 text-xl">Gejala</div>
+            <form
+                @submit.prevent="addData('/diagnose/gejala')"
+                class="grid md:grid-cols-3 gap-x-4"
+            >
+                <div class="inputan">
+                    <span>Kode</span>
+                    <input type="text" v-model="formGejala.kode" required />
+                </div>
+                <div class="inputan">
+                    <span>Value</span>
+                    <input type="text" v-model="formGejala.value" required />
+                </div>
+                <div>
+                    <br />
+                    <button
+                        class="bg-primary/20 text-primary px-10 py-2 rounded-full"
+                    >
+                        Add Data
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div
+            class="w-full my-[20px] text-sm border border-gray-200 bg-white rounded-xl shadows p-4 pt-10 max-h-[85vh] overflow-auto"
+        >
+            <div class="px-4">
+                <table class="table-auto w-[600px] md:w-full">
+                    <thead>
+                        <tr class="text-left">
+                            <th>No.</th>
+                            <th>Kode</th>
+                            <th>Value</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            class="border-t"
+                            v-for="(index, item, a) in listGejala"
+                            :key="index"
+                        >
+                            <td class="pr-6 py-2">{{ item + 1 }}.</td>
+                            <td class="pr-6 py-2">{{ index.kode }}</td>
+                            <td class="pr-6 py-2">{{ index.value }}</td>
+                            <td class="pr-6 py-2">
+                                <!-- {{ hourFormatter(index.created_at) }}
+              {{ dateFormatter(index.created_at) }} -->
+
+                                <Menu
+                                    as="div"
+                                    class="relative inline-block text-left"
+                                >
+                                    <div>
+                                        <MenuButton
+                                            class="p-2 rounded-lg text-primary bg-primary/10"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                id="Outline"
+                                                viewBox="0 0 24 24"
+                                                class="w-4 h-4"
+                                            >
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M7,0H4A4,4,0,0,0,0,4V7a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V4A4,4,0,0,0,7,0ZM9,7A2,2,0,0,1,7,9H4A2,2,0,0,1,2,7V4A2,2,0,0,1,4,2H7A2,2,0,0,1,9,4Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M20,0H17a4,4,0,0,0-4,4V7a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V4a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M7,13H4a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V17A4,4,0,0,0,7,13Zm2,7a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2H7a2,2,0,0,1,2,2Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M20,13H17a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V17A4,4,0,0,0,20,13Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
+                                                />
+                                            </svg>
+                                        </MenuButton>
+                                    </div>
+
+                                    <div class="relative z-30">
+                                        <transition
+                                            enter-active-class="transition duration-100 ease-out"
+                                            enter-from-class="transform scale-95 opacity-0"
+                                            enter-to-class="transform scale-100 opacity-100"
+                                            leave-active-class="transition duration-75 ease-in"
+                                            leave-from-class="transform scale-100 opacity-100"
+                                            leave-to-class="transform scale-95 opacity-0"
+                                        >
+                                            <MenuItems
+                                                class="absolute right-0 mt-2 w-40 z-30 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                            >
+                                                <div class="px-1 py-1">
+                                                    <MenuItem
+                                                        v-slot="{ active }"
+                                                    >
+                                                        <button
+                                                            @click="
+                                                                deleteUser(
+                                                                    index
+                                                                )
+                                                            "
+                                                            :class="[
+                                                                active
+                                                                    ? 'bg-primary text-white'
+                                                                    : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </MenuItem>
+                                                </div>
+                                            </MenuItems>
+                                        </transition>
+                                    </div>
+                                </Menu>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center pt-4">
+                <!-- <button
+        v-if="!isMax"
+        @click="loadMore()"
+        class="bg-primary/20 text-primary px-10 py-2 rounded-full"
+      >
+        Load More
+      </button> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="my-[70px]">
+        <div class="mt-[25px]">
+            <div class="font-bold text-primary py-4 text-xl">Relasi</div>
+            <form
+                @submit.prevent="addData('/diagnose/relasi')"
+                class="grid md:grid-cols-3 gap-x-4"
+            >
+                <div class="inputan">
+                    <span>Kode Penyakit</span>
+                    <input
+                        type="text"
+                        v-model="formRelasi.penyakit_kode"
+                        required
+                    />
+                </div>
+                <div class="inputan">
+                    <span>Kode Gejala</span>
+                    <input
+                        type="text"
+                        v-model="formRelasi.gejala_kode"
+                        required
+                    />
+                </div>
+                <div>
+                    <br />
+                    <button
+                        class="bg-primary/20 text-primary px-10 py-2 rounded-full"
+                    >
+                        Add Data
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div
+            class="w-full my-[20px] text-sm border border-gray-200 bg-white rounded-xl shadows p-4 pt-10 max-h-[85vh] overflow-auto"
+        >
+            <div class="px-4">
+                <table class="table-auto w-[600px] md:w-full">
+                    <thead>
+                        <tr class="text-left">
+                            <th>No.</th>
+                            <th>Kode Penyakit</th>
+                            <th>Kode Gejala</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            class="border-t"
+                            v-for="(index, item, a) in listRelasi"
+                            :key="index"
+                        >
+                            <td class="pr-6 py-2">{{ item + 1 }}.</td>
+                            <td class="pr-6 py-2">{{ index.gejala_kode }}</td>
+                            <td class="pr-6 py-2">{{ index.penyakit_kode }}</td>
+                            <td class="pr-6 py-2">
+                                <!-- {{ hourFormatter(index.created_at) }}
+              {{ dateFormatter(index.created_at) }} -->
+
+                                <Menu
+                                    as="div"
+                                    class="relative inline-block text-left"
+                                >
+                                    <div>
+                                        <MenuButton
+                                            class="p-2 rounded-lg text-primary bg-primary/10"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                id="Outline"
+                                                viewBox="0 0 24 24"
+                                                class="w-4 h-4"
+                                            >
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M7,0H4A4,4,0,0,0,0,4V7a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V4A4,4,0,0,0,7,0ZM9,7A2,2,0,0,1,7,9H4A2,2,0,0,1,2,7V4A2,2,0,0,1,4,2H7A2,2,0,0,1,9,4Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M20,0H17a4,4,0,0,0-4,4V7a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V4a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M7,13H4a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4H7a4,4,0,0,0,4-4V17A4,4,0,0,0,7,13Zm2,7a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2H7a2,2,0,0,1,2,2Z"
+                                                />
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M20,13H17a4,4,0,0,0-4,4v3a4,4,0,0,0,4,4h3a4,4,0,0,0,4-4V17A4,4,0,0,0,20,13Zm2,7a2,2,0,0,1-2,2H17a2,2,0,0,1-2-2V17a2,2,0,0,1,2-2h3a2,2,0,0,1,2,2Z"
+                                                />
+                                            </svg>
+                                        </MenuButton>
+                                    </div>
+
+                                    <div class="relative z-30">
+                                        <transition
+                                            enter-active-class="transition duration-100 ease-out"
+                                            enter-from-class="transform scale-95 opacity-0"
+                                            enter-to-class="transform scale-100 opacity-100"
+                                            leave-active-class="transition duration-75 ease-in"
+                                            leave-from-class="transform scale-100 opacity-100"
+                                            leave-to-class="transform scale-95 opacity-0"
+                                        >
+                                            <MenuItems
+                                                class="absolute right-0 mt-2 w-40 z-30 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                            >
+                                                <div class="px-1 py-1">
+                                                    <MenuItem
+                                                        v-slot="{ active }"
+                                                    >
+                                                        <button
+                                                            @click="
+                                                                deleteUser(
+                                                                    index
+                                                                )
+                                                            "
+                                                            :class="[
+                                                                active
+                                                                    ? 'bg-primary text-white'
+                                                                    : 'text-gray-900',
+                                                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                            ]"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </MenuItem>
+                                                </div>
+                                            </MenuItems>
+                                        </transition>
+                                    </div>
+                                </Menu>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center pt-4">
+                <!-- <button
+        v-if="!isMax"
+        @click="loadMore()"
+        class="bg-primary/20 text-primary px-10 py-2 rounded-full"
+      >
+        Load More
+      </button> -->
+            </div>
         </div>
     </div>
 </template>
