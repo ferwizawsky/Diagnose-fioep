@@ -24,7 +24,7 @@ const routes = [
     {
         path: "/informasi",
         name: "Informasi",
-        component: import("@/views/landing/Informasi.vue"),
+        component: () => import("@/views/landing/Informasi.vue"),
         meta: {
             public: true,
         },
@@ -40,7 +40,7 @@ const routes = [
     {
         path: "/bantuan",
         name: "Bantuan",
-        component: import("@/views/landing/Bantuan.vue"),
+        component: () => import("@/views/landing/Bantuan.vue"),
         meta: {
             public: true,
         },

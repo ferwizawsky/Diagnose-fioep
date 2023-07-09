@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import BerandaRabbit from "../../components/BerandaRabbit.vue";
-import Navbar from "../../components/Navbar.vue";
+import Navbar from "@/components/Navbar.vue";
 </script>
 <template>
     <div class="min-h-screen bg-gray-100 text-gray-600 relative pb-20">
