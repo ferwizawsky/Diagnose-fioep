@@ -6,7 +6,7 @@ import Navbar from "../../components/Navbar.vue";
 const username = ref("");
 const password = ref("");
 const type = ref("password");
-
+const url = window.baseUrl;
 onMounted(() => {});
 
 function login() {
@@ -32,7 +32,7 @@ function login() {
                 </div>
             </div>
             <div class="px-10">
-                <img src="/hamil.jpeg" class="" />
+                <img :src="`${url}/hamil.jpeg`" class="" />
             </div>
         </div>
 

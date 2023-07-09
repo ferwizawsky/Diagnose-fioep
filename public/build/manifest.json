@@ -1,99 +1,142 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.18783bab.js",
+    "file": "assets/app.4c99d882.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
       "resources/js/views/landing/Beranda.vue",
       "resources/js/views/landing/Diagnose.vue",
       "resources/js/views/login.vue",
+      "resources/js/views/landing/Informasi.vue",
+      "resources/js/views/landing/Bantuan.vue",
       "resources/js/views/admin/base.vue",
       "resources/js/views/admin/exam.vue",
       "resources/js/views/admin/user.vue"
     ],
     "css": [
-      "assets/app.d65b150f.css"
+      "assets/app.02b37883.css",
+      "assets/app.59506fd8.css"
     ]
   },
   "resources/js/views/landing/Beranda.vue": {
-    "file": "assets/Beranda.6dd0e366.js",
+    "file": "assets/Beranda.adecc432.js",
     "src": "resources/js/views/landing/Beranda.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_Navbar.8599e34f.js",
+      "_Navbar.08200bfa.js",
       "resources/js/app.js"
+    ],
+    "css": [
+      "assets/app.59506fd8.css"
     ]
   },
-  "_Navbar.8599e34f.js": {
-    "file": "assets/Navbar.8599e34f.js",
+  "_Navbar.08200bfa.js": {
+    "file": "assets/Navbar.08200bfa.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/views/landing/Diagnose.vue": {
-    "file": "assets/Diagnose.0e273c06.js",
+    "file": "assets/Diagnose.4569c616.js",
     "src": "resources/js/views/landing/Diagnose.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_Navbar.8599e34f.js",
+      "_Navbar.08200bfa.js",
       "resources/js/app.js"
+    ],
+    "css": [
+      "assets/app.59506fd8.css"
     ]
   },
   "resources/js/views/login.vue": {
-    "file": "assets/login.aafdcbc5.js",
+    "file": "assets/login.16bd3b40.js",
     "src": "resources/js/views/login.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js"
+    ],
+    "css": [
+      "assets/app.59506fd8.css"
+    ]
+  },
+  "resources/js/views/landing/Informasi.vue": {
+    "file": "assets/Informasi.fa12969e.js",
+    "src": "resources/js/views/landing/Informasi.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Navbar.08200bfa.js",
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/app.59506fd8.css"
+    ]
+  },
+  "resources/js/views/landing/Bantuan.vue": {
+    "file": "assets/Bantuan.f82965fd.js",
+    "src": "resources/js/views/landing/Bantuan.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Navbar.08200bfa.js",
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/app.59506fd8.css"
     ]
   },
   "resources/js/views/admin/base.vue": {
-    "file": "assets/base.de4f428b.js",
+    "file": "assets/base.0b2a243a.js",
     "src": "resources/js/views/admin/base.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_menu.3fde1349.js"
+      "_menu.74fd1659.js"
     ],
     "css": [
-      "assets/base.dc449077.css"
+      "assets/base.dc449077.css",
+      "assets/app.59506fd8.css"
     ]
   },
-  "_menu.3fde1349.js": {
-    "file": "assets/menu.3fde1349.js",
+  "_menu.74fd1659.js": {
+    "file": "assets/menu.74fd1659.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/views/admin/exam.vue": {
-    "file": "assets/exam.0284a416.js",
+    "file": "assets/exam.16017943.js",
     "src": "resources/js/views/admin/exam.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_menu.3fde1349.js"
+      "_menu.74fd1659.js"
+    ],
+    "css": [
+      "assets/app.59506fd8.css"
     ]
   },
   "resources/js/views/admin/user.vue": {
-    "file": "assets/user.a06ac2ae.js",
+    "file": "assets/user.c4cb6d03.js",
     "src": "resources/js/views/admin/user.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_menu.3fde1349.js"
+      "_menu.74fd1659.js"
+    ],
+    "css": [
+      "assets/app.59506fd8.css"
     ]
-  },
-  "resources/css/app.css": {
-    "file": "assets/app.d21c0a43.css",
-    "src": "resources/css/app.css",
-    "isEntry": true
   },
   "resources/js/views/admin/base.css": {
     "file": "assets/base.dc449077.css",
     "src": "resources/js/views/admin/base.css"
   },
   "resources/js/app.css": {
-    "file": "assets/app.d65b150f.css",
+    "file": "assets/app.02b37883.css",
     "src": "resources/js/app.css"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.59506fd8.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
   }
 }

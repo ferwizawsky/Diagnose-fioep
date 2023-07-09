@@ -5,6 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FIOEP Diagnose</title>
+
+    <meta name="keywords" content="{{ ENV('APP_NAME') }}">
+    <!-- <meta name="description" content="{{ ENV('APP_DESC') }}"> -->
+    <meta name="base-url" content="{{ url('/') }}">
+    <!-- <link rel="icon" href="{{ url('/') }}/images/logo.png"> -->
+    <meta name="app-name" content="{{ ENV('APP_NAME') }}">
+
     <link type="image/x-icon" rel="icon" href="https://lh3.googleusercontent.com/-xXNyOZKCHKw/YxIi-k3Hp-I/AAAAAAAAAq4/FmLViZaV7OYMbiisL7nXBVJ0wL6MmNHNgCNcBGAsYHQ/h120/icona.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
