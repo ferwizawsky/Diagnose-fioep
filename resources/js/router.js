@@ -22,9 +22,25 @@ const routes = [
         },
     },
     {
+        path: "/informasi",
+        name: "Informasi",
+        component: import("@/views/landing/Informasi.vue"),
+        meta: {
+            public: true,
+        },
+    },
+    {
         path: "/diagnosa",
         name: "Diagnose",
         component: Diagnose,
+        meta: {
+            public: true,
+        },
+    },
+    {
+        path: "/bantuan",
+        name: "Bantuan",
+        component: import("@/views/landing/Bantuan.vue"),
         meta: {
             public: true,
         },

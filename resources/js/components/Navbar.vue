@@ -11,6 +11,14 @@ const nav = ref([
         to: "/diagnosa",
     },
     {
+        text: "Informasi",
+        to: "/informasi",
+    },
+    {
+        text: "Bantuan",
+        to: "/bantuan",
+    },
+    {
         text: "Login",
         to: "/login",
     },

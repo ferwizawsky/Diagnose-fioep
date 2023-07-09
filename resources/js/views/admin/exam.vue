@@ -444,8 +444,8 @@ function hourFormatter(e) {
                     <thead>
                         <tr class="text-left">
                             <th>No.</th>
-                            <th>Kode Penyakit</th>
                             <th>Kode Gejala</th>
+                            <th>Kode Penyakit</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
