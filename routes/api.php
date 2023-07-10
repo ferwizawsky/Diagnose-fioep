@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\TeleBotController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/tele', "TeleBotController@sendDummy");
+Route::get('setWebhook', [TeleBotController::class, 'setWebhook']);
+Route::post('webhook', [TeleBotController::class, 'commandHandlerWebHook']);
 
 Route::post('/diagnose', "DiagnosisController@diagnose");
 Route::post('/login', "UserController@login");
